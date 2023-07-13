@@ -1,0 +1,71 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "local",
+      "stackName": "aws_instance",
+      "version": "0.17.1"
+    },
+    "outputs": {
+      "aws_instance": {
+        "bucket_id": "bucket_id",
+        "public_ip": "public_ip"
+      }
+    }
+  },
+  "output": {
+    "bucket_id": {
+      "value": "${aws_s3_bucket.bucket.id}"
+    },
+    "public_ip": {
+      "value": "${aws_instance.compute.public_ip}"
+    }
+  },
+  "provider": {
+    "aws": [
+      {
+        "region": "us-west-1"
+      }
+    ]
+  },
+  "resource": {
+    "aws_instance": {
+      "compute": {
+        "//": {
+          "metadata": {
+            "path": "aws_instance/compute",
+            "uniqueId": "compute"
+          }
+        },
+        "ami": "ami-01456a894f71116f2",
+        "instance_type": "t2.micro",
+        "tags": {
+          "CreatedWith": "cdktf",
+          "Name": "cdktf-golang"
+        }
+      }
+    },
+    "aws_s3_bucket": {
+      "bucket": {
+        "//": {
+          "metadata": {
+            "path": "aws_instance/bucket",
+            "uniqueId": "bucket"
+          }
+        }
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "local": {
+        "path": "/Users/marksmith/terraform_cdktf_golang/terraform.aws_instance.tfstate"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "5.6.2"
+      }
+    }
+  }
+}
